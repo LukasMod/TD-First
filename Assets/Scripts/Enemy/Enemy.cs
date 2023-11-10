@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public static Action OnEndReached;
+    public static Action<Enemy> OnEndReached;
 
     [SerializeField] private float moveSpeed = 3f;
 
@@ -106,7 +106,7 @@ public class Enemy : MonoBehaviour
 
     private void EndPointReached()
     {
-        OnEndReached?.Invoke();
+        OnEndReached?.Invoke(this);
         _enemyHealth.ResetHealth();
         ObjectPooler.ReturnToPool(gameObject);
     }
